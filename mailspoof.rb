@@ -150,13 +150,20 @@ begin
   puts "[-] Connecting to [#{mail_server}]..."
   s = TCPSocket.new(  mail_server , 25 ) # SMTP
   puts "[-] Connected to [#{mail_server}]. Delivering mail..."
+  sleep 1
 
   s.print "HELO #{to_domain}\r\n"
   response_lines << s.gets
+  sleep 1
+  
   s.print "MAIL FROM: <#{$options[:from]}>\r\n"
   response_lines << s.gets
+  sleep 1
+  
   s.print "RCPT TO: <#{$options[:to]}>\r\n"
   response_lines << s.gets
+  sleep 1
+  
   s.print "DATA\r\n"
   response_lines << s.gets
   s.print "To: <#{$options[:to]}>\r\n"
